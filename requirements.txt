@@ -1,3 +1,2 @@
-slackbot
-ruamel.yaml
 chatterbot
+slackclient

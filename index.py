@@ -13,11 +13,11 @@ import json
 botBrain = ChatBot(
     "dadBot",
     storage_adapter="chatterbot.storage.SQLStorageAdapter",
-    #logic_adapters=[
-    #    "chatterbot.logic.MathematicalEvaluation",
-    #    "chatterbot.logic.TimeLogicAdapter",
-    #    "chatterbot.logic.BestMatch"
-    #],
+    logic_adapters=[
+        "chatterbot.logic.MathematicalEvaluation",
+        #"chatterbot.logic.TimeLogicAdapter",
+        "chatterbot.logic.BestMatch"
+    ],
     trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
     database="./db/database.db"
 )
