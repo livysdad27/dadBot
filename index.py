@@ -14,8 +14,6 @@ botBrain = ChatBot(
     "dadBot",
     storage_adapter="chatterbot.storage.SQLStorageAdapter",
     logic_adapters=[
-        "chatterbot.logic.MathematicalEvaluation",
-        #"chatterbot.logic.TimeLogicAdapter",
         "chatterbot.logic.BestMatch"
     ],
     trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
@@ -24,9 +22,12 @@ botBrain = ChatBot(
 
 
 # Start by training our bot with the ChatterBot corpus data
-botBrain.train(
-    'chatterbot.corpus.english'
-)
+botBrain.train( 'chatterbot.corpus.english.computers')
+botBrain.train( 'chatterbot.corpus.english.gossip')
+botBrain.train( 'chatterbot.corpus.english.science')
+botBrain.train( 'chatterbot.corpus.english.greetings')
+botBrain.train( 'chatterbot.corpus.english.greetings')
+
 
 
 slack_token = os.environ["SLACK_API_TOKEN"]
@@ -40,10 +41,13 @@ if sc.rtm_connect():
           if 'type' in evt[0]:
             if evt[0]['type'] == 'message':
               if evt[0]['user'] != 'U7MKWLER1':
-                print(evt[0]['text'])
-                answer = botBrain.get_response(evt[0]['text'])
-                print(answer)
-                sc.rtm_send_message('D7NJRHWVC', str(answer))
+                repChannel = evt[0]['channel']
+                msgText = evt[0]['text']
+                if repChannel == 'D7NJRHWVC' or '<@U7MKWLER1>' in msgText:
+                  print(evt[0]['text'])
+                  answer = botBrain.get_response(evt[0]['text'])
+                  print(answer)
+                  sc.rtm_send_message(repChannel, str(answer))
           time.sleep(1)
 else:
     print("Connection Failed")
