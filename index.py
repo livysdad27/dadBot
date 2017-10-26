@@ -17,16 +17,12 @@ botBrain = ChatBot(
         "chatterbot.logic.BestMatch"
     ],
     trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
-    database="./db/database.db"
+    database="./db/dadBot"
 )
 
 
 # Start by training our bot with the ChatterBot corpus data
-botBrain.train( 'chatterbot.corpus.english.computers')
-botBrain.train( 'chatterbot.corpus.english.gossip')
-botBrain.train( 'chatterbot.corpus.english.science')
-botBrain.train( 'chatterbot.corpus.english.greetings')
-botBrain.train( 'chatterbot.corpus.english.greetings')
+botBrain.train( './dad.yml')
 
 
 
